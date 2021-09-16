@@ -10,10 +10,14 @@ import {
   Keyboard,
   Platform
 } from 'react-native';
+import CurrencyInput from 'react-native-currency-input';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 export default function Request2Screen({ navigation }) {
+  const [medicalAllowance, setMedicalAllowance] = React.useState('');
+  const [amountPaid, setAmountPaid] = React.useState('');
+
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -58,10 +62,30 @@ export default function Request2Screen({ navigation }) {
               />
             </View>
             <TextInput style={styles.input} placeholder='Employer Name' />
-            <TextInput style={styles.input} placeholder='Medical Allowance' />
+            <CurrencyInput
+              value={medicalAllowance}
+              onChangeValue={setMedicalAllowance}
+              prefix='₦'
+              delimiter=','
+              separator='.'
+              precision={2}
+              style={styles.input}
+              placeholder='Medical Allowance'
+              keyboardType='numeric'
+            />
             <TextInput style={styles.input} placeholder='Payment Date' />
             <TextInput style={styles.input} placeholder='Key Contact' />
-            <TextInput style={styles.input} placeholder='Amount Paid' />
+            <CurrencyInput
+              value={amountPaid}
+              onChangeValue={setAmountPaid}
+              prefix='₦'
+              delimiter=','
+              separator='.'
+              precision={2}
+              style={styles.input}
+              placeholder='Amount Paid'
+              keyboardType='numeric'
+            />
             <Pressable
               onPress={() => {
                 Keyboard.dismiss();
