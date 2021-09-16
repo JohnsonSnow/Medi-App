@@ -20,6 +20,7 @@ export default function Signup3Screen({ navigation }) {
   const dispatch = useDispatch();
   const appData = useSelector(state => state.app);
   const [maritalStatus, setMaritalStatus] = React.useState(null);
+  const [educationLevel, setEducationLevel] = React.useState(null);
 
   return (
     <KeyboardAwareScrollView
@@ -35,14 +36,12 @@ export default function Signup3Screen({ navigation }) {
           </View>
           <Formik
             initialValues={{
-              educationLevel: '',
               address1: '',
               address2: '',
               city: '',
               state: ''
             }}
             onSubmit={({
-              educationLevel,
               address1,
               address2,
               city,
@@ -79,13 +78,23 @@ export default function Signup3Screen({ navigation }) {
                     ]}
                   />
                 </View>
-                <TextInput
-                  style={styles.input}
-                  placeholder='Educational Level'
-                  onChangeText={handleChange('educationLevel')}
-                  onBlur={handleBlur('educationLevel')}
-                  value={values.educationLevel}
-                />
+                <View style={styles.picker}>
+                  <RNPickerSelect
+                    placeholder={{
+                      label: 'Select your education level',
+                      value: null
+                    }}
+                    onValueChange={value => setEducationLevel(value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    value={educationLevel}
+                    items={[
+                      { label: 'Undergraduate', value: 'Undergraduate' },
+                      { label: 'Bachelor', value: 'Bachelor' },
+                      { label: 'Masters', value: 'Masters' },
+                      { label: 'Doctorate', value: 'Doctorate' }
+                    ]}
+                  />
+                </View>
                 <TextInput
                   style={styles.input}
                   placeholder='Address Line 1'
