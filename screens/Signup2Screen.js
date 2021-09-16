@@ -10,6 +10,7 @@ import {
   Keyboard,
   Platform
 } from 'react-native';
+import { format, differenceInYears } from 'date-fns';
 import * as yup from 'yup';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -52,7 +53,22 @@ export default function Signup2Screen({ navigation }) {
               lastName: yup.string().required(),
               phoneCode: yup.number().required().positive().integer(),
               phoneNumber: yup.number().required().positive().integer(),
-              email: yup.string().email().required()
+              email: yup.string().email().required(),
+              birthday: yup
+                .string()
+                .nullable()
+                .test(
+                  'birthday',
+                  'You need to be 18 years or greater',
+                  function (value) {
+                    return (
+                      differenceInYears(
+                        new Date(),
+                        new Date(format(new Date(birthday), 'MM/dd/yyyy'))
+                      ) >= 18
+                    );
+                  }
+                )
             })}
             onSubmit={({
               firstName,
@@ -144,10 +160,27 @@ export default function Signup2Screen({ navigation }) {
                 <Pressable onPress={() => setShowDatePicker(true)}>
                   <View pointerEvents='none'>
                     <TextInput
-                      style={styles.input}
+                      style={{
+                        ...styles.input,
+                        borderWidth:
+                          errors.birthday && touched.birthday ? 1 : 0,
+                        borderColor:
+                          errors.birthday && touched.birthday ? '#f00' : null
+                      }}
                       placeholder='Birthday'
-                      value={birthday?.toLocaleDateString()}
+                      onChangeText={handleChange('birthday')}
+                      onBlur={handleBlur('birthday')}
+                      value={
+                        birthday
+                          ? format(new Date(birthday), 'dd/MM/yyyy')
+                          : null
+                      }
                     />
+                    {errors.birthday && touched.birthday && (
+                      <Text style={{ color: '#f00', marginBottom: 5 }}>
+                        {errors.birthday}
+                      </Text>
+                    )}
                   </View>
                 </Pressable>
                 {showDatePicker && (
