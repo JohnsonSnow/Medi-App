@@ -10,10 +10,18 @@ import {
   Keyboard,
   Platform
 } from 'react-native';
+import { format } from 'date-fns';
+import CurrencyInput from 'react-native-currency-input';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function Request2Screen({ navigation }) {
+  const [medicalAllowance, setMedicalAllowance] = React.useState('');
+  const [amountPaid, setAmountPaid] = React.useState('');
+  const [showDatePicker, setShowDatePicker] = React.useState(false);
+  const [paymentDate, setPaymentDate] = React.useState(null);
+
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1 }}
@@ -58,10 +66,54 @@ export default function Request2Screen({ navigation }) {
               />
             </View>
             <TextInput style={styles.input} placeholder='Employer Name' />
-            <TextInput style={styles.input} placeholder='Medical Allowance' />
-            <TextInput style={styles.input} placeholder='Payment Date' />
+            <CurrencyInput
+              value={medicalAllowance}
+              onChangeValue={setMedicalAllowance}
+              prefix='₦'
+              delimiter=','
+              separator='.'
+              precision={2}
+              style={styles.input}
+              placeholder='Medical Allowance'
+              keyboardType='numeric'
+            />
+            <Pressable onPress={() => setShowDatePicker(true)}>
+              <View pointerEvents='none'>
+                <TextInput
+                  style={styles.input}
+                  placeholder='Payment Date'
+                  onChangeText={value => setPaymentDate(value)}
+                  value={
+                    paymentDate
+                      ? format(new Date(paymentDate), 'dd/MM/yyyy')
+                      : null
+                  }
+                />
+              </View>
+            </Pressable>
+            {showDatePicker && (
+              <DateTimePicker
+                style={styles.input}
+                mode='date'
+                value={new Date()}
+                onChange={(event, selectedDate) => {
+                  setShowDatePicker(false);
+                  setPaymentDate(selectedDate || null);
+                }}
+              />
+            )}
             <TextInput style={styles.input} placeholder='Key Contact' />
-            <TextInput style={styles.input} placeholder='Amount Paid' />
+            <CurrencyInput
+              value={amountPaid}
+              onChangeValue={setAmountPaid}
+              prefix='₦'
+              delimiter=','
+              separator='.'
+              precision={2}
+              style={styles.input}
+              placeholder='Amount Paid'
+              keyboardType='numeric'
+            />
             <Pressable
               onPress={() => {
                 Keyboard.dismiss();

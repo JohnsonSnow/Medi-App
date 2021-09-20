@@ -7,8 +7,10 @@ import {
   Image,
   Pressable,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Platform
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,6 +19,8 @@ import { userDetails } from '../store/actions';
 export default function Signup3Screen({ navigation }) {
   const dispatch = useDispatch();
   const appData = useSelector(state => state.app);
+  const [maritalStatus, setMaritalStatus] = React.useState(null);
+  const [educationLevel, setEducationLevel] = React.useState(null);
 
   return (
     <KeyboardAwareScrollView
@@ -32,16 +36,12 @@ export default function Signup3Screen({ navigation }) {
           </View>
           <Formik
             initialValues={{
-              maritalStatus: '',
-              educationLevel: '',
               address1: '',
               address2: '',
               city: '',
               state: ''
             }}
             onSubmit={({
-              maritalStatus,
-              educationLevel,
               address1,
               address2,
               city,
@@ -62,20 +62,39 @@ export default function Signup3Screen({ navigation }) {
             }}>
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <View style={styles.main}>
-                <TextInput
-                  style={styles.input}
-                  placeholder='Marital Status'
-                  onChangeText={handleChange('maritalStatus')}
-                  onBlur={handleBlur('maritalStatus')}
-                  value={values.maritalStatus}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder='Educational Level'
-                  onChangeText={handleChange('educationLevel')}
-                  onBlur={handleBlur('educationLevel')}
-                  value={values.educationLevel}
-                />
+                <View style={styles.picker}>
+                  <RNPickerSelect
+                    placeholder={{
+                      label: 'Select your marital status',
+                      value: null
+                    }}
+                    onValueChange={value => setMaritalStatus(value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    value={maritalStatus}
+                    items={[
+                      { label: 'Single', value: 'Single' },
+                      { label: 'Married', value: 'Married' },
+                      { label: 'Divorced', value: 'Divorced' }
+                    ]}
+                  />
+                </View>
+                <View style={styles.picker}>
+                  <RNPickerSelect
+                    placeholder={{
+                      label: 'Select your education level',
+                      value: null
+                    }}
+                    onValueChange={value => setEducationLevel(value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    value={educationLevel}
+                    items={[
+                      { label: 'Undergraduate', value: 'Undergraduate' },
+                      { label: 'Bachelor', value: 'Bachelor' },
+                      { label: 'Masters', value: 'Masters' },
+                      { label: 'Doctorate', value: 'Doctorate' }
+                    ]}
+                  />
+                </View>
                 <TextInput
                   style={styles.input}
                   placeholder='Address Line 1'
@@ -178,5 +197,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     paddingHorizontal: 10,
     marginBottom: 10
+  },
+  picker: {
+    backgroundColor: '#fff',
+    color: '#000',
+    height: 40,
+    paddingHorizontal: Platform.OS === 'ios' ? 10 : 0,
+    marginBottom: 10,
+    justifyContent: 'center'
   }
 });

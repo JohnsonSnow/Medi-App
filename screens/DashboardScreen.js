@@ -12,8 +12,12 @@ export default function DashboardScreen({ navigation }) {
       </Text>
       <View style={styles.main}>
         <View style={styles.card}>
-          <Text style={styles.text}>Your Treatment Bills</Text>
+          <Text style={{ ...styles.text, textAlign: 'left' }}>
+            Your Treatment Bills
+          </Text>
+          <View style={styles.cardLine}></View>
           <Text style={{ ...styles.text, marginTop: 5 }}>NGN 20,000.00</Text>
+          <View style={styles.cardLine}></View>
         </View>
         <View style={styles.buttonGroup}>
           <Pressable
@@ -76,6 +80,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginBottom: 20,
     paddingVertical: 50
+  },
+  cardLine: {
+    height: 5,
+    width: '100%',
+    backgroundColor: '#eff1f8',
+    marginTop: 5
   },
   main: {
     padding: 20,
