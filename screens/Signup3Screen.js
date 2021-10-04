@@ -15,10 +15,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
+import stateAndCity from '../data/state-city.json';
 
 export default function Signup3Screen({ navigation }) {
   const dispatch = useDispatch();
   const appData = useSelector(state => state.app);
+  const [stateId, setStateId] = React.useState(null);
+  const [cityId, setCityId] = React.useState(null);
   const [maritalStatus, setMaritalStatus] = React.useState(null);
   const [educationLevel, setEducationLevel] = React.useState(null);
 
@@ -37,25 +40,16 @@ export default function Signup3Screen({ navigation }) {
           <Formik
             initialValues={{
               address1: '',
-              address2: '',
-              city: '',
-              state: ''
+              address2: ''
             }}
-            onSubmit={({
-              address1,
-              address2,
-              city,
-              state
-            }) => {
+            onSubmit={({ address1, address2 }) => {
               dispatch(
                 userDetails({
                   ...appData,
                   maritalStatus,
                   educationLevel,
                   address1,
-                  address2,
-                  city,
-                  state
+                  address2
                 })
               );
               navigation.navigate('Signup4');
@@ -109,20 +103,41 @@ export default function Signup3Screen({ navigation }) {
                   onBlur={handleBlur('address2')}
                   value={values.address2}
                 />
-                <TextInput
-                  style={styles.input}
-                  placeholder='City'
-                  onChangeText={handleChange('city')}
-                  onBlur={handleBlur('city')}
-                  value={values.city}
-                />
-                <TextInput
-                  style={styles.input}
-                  placeholder='State'
-                  onChangeText={handleChange('state')}
-                  onBlur={handleBlur('state')}
-                  value={values.state}
-                />
+                <View style={styles.picker}>
+                  <RNPickerSelect
+                    placeholder={{
+                      label: 'Select your state',
+                      value: null
+                    }}
+                    onValueChange={value => setStateId(value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    value={stateId}
+                    items={stateAndCity.map(data => ({
+                      label: data.state.name,
+                      value: data.state.id
+                    }))}
+                  />
+                </View>
+                <View style={styles.picker}>
+                  <RNPickerSelect
+                    placeholder={{
+                      label: 'Select your city',
+                      value: null
+                    }}
+                    disabled={stateId === null}
+                    onValueChange={value => setCityId(value)}
+                    style={{ inputAndroid: { color: 'black' } }}
+                    value={cityId}
+                    items={
+                      stateAndCity
+                        .find(data => data.state.id === stateId)
+                        ?.state.locals.map(data => ({
+                          label: data.name,
+                          value: data.id
+                        })) || []
+                    }
+                  />
+                </View>
                 <Pressable
                   onPress={() => {
                     Keyboard.dismiss();
