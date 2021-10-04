@@ -230,8 +230,13 @@ export default function Signup2Screen({ navigation }) {
                     ]}>
                     <Text style={styles.buttonText}>Next</Text>
                   </Pressable>
-                  <Text style={styles.text}>
-                    Already have an account? Sign in
+                  <Text
+                    style={styles.text}
+                    onPress={() => navigation.navigate('Signin')}>
+                    Already have an account?{' '}
+                    <Text style={{ textDecorationLine: 'underline' }}>
+                      Sign in
+                    </Text>
                   </Text>
                 </View>
               </View>
