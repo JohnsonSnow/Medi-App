@@ -1,10 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
-import { createDrawerNavigator } from '@react-navigation/drawer';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-
-const Drawer = createDrawerNavigator();
 
 export default function DashboardScreen({ navigation }) {
   const { firstName, lastName } = useSelector(state => state.app);

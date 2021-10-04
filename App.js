@@ -23,6 +23,7 @@ import Signup4Screen from './screens/Signup4Screen';
 import Signup5Screen from './screens/Signup5Screen';
 import Signup6Screen from './screens/Signup6Screen';
 import SignupCompleteScreen from './screens/SignupCompleteScreen';
+import DashboardNavigation from './navigations/DashboardNavigation';
 
 const store = createStore(reducers);
 const Stack = createNativeStackNavigator();
@@ -103,18 +104,8 @@ export default function App() {
           />
           <Stack.Screen
             name='Dashboard'
-            component={DashboardScreen}
-            options={{
-              title: 'App Name',
-              headerLeft: () => (
-                <Entypo
-                  name='menu'
-                  size={30}
-                  color='#fff'
-                  style={{ marginRight: 10 }}
-                />
-              )
-            }}
+            component={DashboardNavigation}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name='Request1'
