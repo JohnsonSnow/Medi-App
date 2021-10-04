@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Entypo } from '@expo/vector-icons';
 import reducers from './store/reducers';
 import AppointmentHistoryScreen from './screens/AppointmentHistoryScreen';
 import DashboardScreen from './screens/DashboardScreen';
@@ -104,7 +105,15 @@ export default function App() {
             name='Dashboard'
             component={DashboardScreen}
             options={{
-              title: ''
+              title: 'App Name',
+              headerLeft: () => (
+                <Entypo
+                  name='menu'
+                  size={30}
+                  color='#fff'
+                  style={{ marginRight: 10 }}
+                />
+              )
             }}
           />
           <Stack.Screen

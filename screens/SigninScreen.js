@@ -13,9 +13,11 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useSelector } from 'react-redux';
+import TermsAndConditionModal from '../shared/TermsAndConditionModal';
 
 export default function SigninScreen({ navigation }) {
   const appData = useSelector(state => state.app);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
     <KeyboardAwareScrollView
@@ -105,15 +107,21 @@ export default function SigninScreen({ navigation }) {
                   ]}>
                   <Text style={styles.buttonText}>Sign in</Text>
                 </Pressable>
-                <Text style={styles.text}>
-                  By proceeding you also agree to the Terms of Service and
-                  Privacy Policy
+                <Text style={styles.text} onPress={() => setModalVisible(true)}>
+                  By proceeding you also agree to the{' '}
+                  <Text style={{ textDecorationLine: 'underline' }}>
+                    Terms of Service and Privacy Policy
+                  </Text>
                 </Text>
               </View>
             )}
           </Formik>
         </View>
       </TouchableWithoutFeedback>
+      <TermsAndConditionModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </KeyboardAwareScrollView>
   );
 }

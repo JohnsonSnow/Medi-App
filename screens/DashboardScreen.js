@@ -1,6 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, Pressable } from 'react-native';
 import { useSelector } from 'react-redux';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
 
 export default function DashboardScreen({ navigation }) {
   const { firstName, lastName } = useSelector(state => state.app);
