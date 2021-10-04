@@ -78,6 +78,7 @@ export default function Signup1Screen({ navigation }) {
                     onChangeText={handleChange('phoneCode')}
                     onBlur={handleBlur('phoneCode')}
                     value={values.phoneCode}
+                    maxLength={4}
                   />
                   <TextInput
                     style={{
@@ -94,6 +95,7 @@ export default function Signup1Screen({ navigation }) {
                     onChangeText={handleChange('phoneNumber')}
                     onBlur={handleBlur('phoneNumber')}
                     value={values.phoneNumber}
+                    maxLength={11}
                   />
                 </View>
                 <View>
