@@ -5,45 +5,117 @@ import {
   View,
   Pressable,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Dimensions
 } from 'react-native';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 export default function RequestSummaryScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.main}>
-          <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
-            <Text style={styles.subtext}>
-              Documents will be mailed in 19 - 30 mins
-            </Text>
-            <Text style={{ ...styles.text, marginBottom: 20 }}>
-              Appt. Date: 31/12/2099
-            </Text>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Consult Fees
+          <SwiperFlatList
+            showPagination
+            style={{ flex: 1 }}
+            paginationStyle={{ top: 370 }}
+            paginationStyleItem={{ height: 15, width: 15 }}
+            paginationStyleItemActive={{ backgroundColor: '#fff' }}
+            paginationStyleItemInactive={{ backgroundColor: '#aaa' }}>
+            <View style={styles.card}>
+              <Text style={styles.text}>Your Appt. Details</Text>
+              <Text style={styles.subtext}>
+                Documents will be mailed in 19 - 30 mins
               </Text>
-              <Text style={styles.subtext}>$13</Text>
-            </View>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Administrative Charges
+              <Text style={{ ...styles.text, marginBottom: 20 }}>
+                Appt. Date: 31/12/2099
               </Text>
-              <Text style={styles.subtext}>$13</Text>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Consult Fees
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Administrative Charges
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Service Charge
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={styles.text}>Total</Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
             </View>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Service Charge
+            <View style={styles.card}>
+              <Text style={styles.text}>Your Appt. Details</Text>
+              <Text style={styles.subtext}>
+                Documents will be mailed in 19 - 30 mins
               </Text>
-              <Text style={styles.subtext}>$13</Text>
+              <Text style={{ ...styles.text, marginBottom: 20 }}>
+                Appt. Date: 31/12/2099
+              </Text>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Consult Fees
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Administrative Charges
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Service Charge
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={styles.text}>Total</Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
             </View>
-            <View style={styles.textDetails}>
-              <Text style={styles.text}>Total</Text>
-              <Text style={styles.subtext}>$13</Text>
+            <View style={styles.card}>
+              <Text style={styles.text}>Your Appt. Details</Text>
+              <Text style={styles.subtext}>
+                Documents will be mailed in 19 - 30 mins
+              </Text>
+              <Text style={{ ...styles.text, marginBottom: 20 }}>
+                Appt. Date: 31/12/2099
+              </Text>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Consult Fees
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Administrative Charges
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={{ ...styles.text, fontWeight: '600' }}>
+                  Service Charge
+                </Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
+              <View style={styles.textDetails}>
+                <Text style={styles.text}>Total</Text>
+                <Text style={styles.subtext}>$13</Text>
+              </View>
             </View>
-          </View>
+          </SwiperFlatList>
         </View>
         <View style={styles.buttonContainer}>
           <Pressable
@@ -71,7 +143,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     width: '100%',
     borderRadius: 20,
-    paddingVertical: 20
+    paddingVertical: 10,
+    width: Dimensions.get('window').width - 60,
+    marginHorizontal: 10
   },
   main: {
     flex: 1,
