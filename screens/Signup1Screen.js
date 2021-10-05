@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,17 +8,21 @@ import {
   Image,
   Pressable,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Modal,
+  ScrollView
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as yup from 'yup';
 import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
+import TermsAndConditionModal from '../shared/TermsAndConditionModal';
 
 export default function Signup1Screen({ navigation }) {
   const dispatch = useDispatch();
   const appData = useSelector(state => state.app);
+  const [modalVisible, setModalVisible] = useState(false);
 
   return (
     <KeyboardAwareScrollView
@@ -74,6 +78,7 @@ export default function Signup1Screen({ navigation }) {
                     onChangeText={handleChange('phoneCode')}
                     onBlur={handleBlur('phoneCode')}
                     value={values.phoneCode}
+                    maxLength={4}
                   />
                   <TextInput
                     style={{
@@ -90,12 +95,17 @@ export default function Signup1Screen({ navigation }) {
                     onChangeText={handleChange('phoneNumber')}
                     onBlur={handleBlur('phoneNumber')}
                     value={values.phoneNumber}
+                    maxLength={11}
                   />
                 </View>
                 <View>
-                  <Text style={styles.text}>
-                    By proceeding you also agree to the Terms of Service and
-                    Privacy Policy
+                  <Text
+                    style={styles.text}
+                    onPress={() => setModalVisible(true)}>
+                    By proceeding you also agree to the{' '}
+                    <Text style={{ textDecorationLine: 'underline' }}>
+                      Terms of Service and Privacy Policy
+                    </Text>
                   </Text>
                   <Pressable
                     onPress={() => {
@@ -116,6 +126,10 @@ export default function Signup1Screen({ navigation }) {
           </Formik>
         </View>
       </TouchableWithoutFeedback>
+      <TermsAndConditionModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </KeyboardAwareScrollView>
   );
 }

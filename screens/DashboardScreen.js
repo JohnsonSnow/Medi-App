@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
+import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 export default function DashboardScreen({ navigation }) {
   const { firstName, lastName } = useSelector(state => state.app);
@@ -11,14 +12,37 @@ export default function DashboardScreen({ navigation }) {
         Welcome, {firstName} {lastName}
       </Text>
       <View style={styles.main}>
-        <View style={styles.card}>
-          <Text style={{ ...styles.text, textAlign: 'left' }}>
-            Your Treatment Bills
-          </Text>
-          <View style={styles.cardLine}></View>
-          <Text style={{ ...styles.text, marginTop: 5 }}>NGN 20,000.00</Text>
-          <View style={styles.cardLine}></View>
-        </View>
+        <SwiperFlatList
+          showPagination
+          paginationStyle={{ top: 215 }}
+          paginationStyleItem={{ height: 10, width: 10 }}
+          paginationStyleItemActive={{ backgroundColor: '#687089' }}
+          paginationStyleItemInactive={{ backgroundColor: '#aaa' }}>
+          <View style={styles.card}>
+            <Text style={{ ...styles.text, textAlign: 'left' }}>
+              Your Treatment Bills
+            </Text>
+            <View style={styles.cardLine}></View>
+            <Text style={{ ...styles.text, marginTop: 5 }}>NGN 20,000.00</Text>
+            <View style={styles.cardLine}></View>
+          </View>
+          <View style={styles.card}>
+            <Text style={{ ...styles.text, textAlign: 'left' }}>
+              Your Treatment Bills
+            </Text>
+            <View style={styles.cardLine}></View>
+            <Text style={{ ...styles.text, marginTop: 5 }}>NGN 30,000.00</Text>
+            <View style={styles.cardLine}></View>
+          </View>
+          <View style={styles.card}>
+            <Text style={{ ...styles.text, textAlign: 'left' }}>
+              Your Treatment Bills
+            </Text>
+            <View style={styles.cardLine}></View>
+            <Text style={{ ...styles.text, marginTop: 5 }}>NGN 50,000.00</Text>
+            <View style={styles.cardLine}></View>
+          </View>
+        </SwiperFlatList>
         <View style={styles.buttonGroup}>
           <Pressable
             onPress={() => navigation.navigate('Request1')}
@@ -76,10 +100,13 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#fff',
-    width: '100%',
+    width: Dimensions.get('window').width - 60,
     borderRadius: 20,
     marginBottom: 20,
-    paddingVertical: 50
+    paddingVertical: 50,
+    justifyContent: 'center',
+    marginLeft: 10,
+    marginRight: 10
   },
   cardLine: {
     height: 5,

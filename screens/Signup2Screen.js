@@ -18,6 +18,7 @@ import { Formik } from 'formik';
 import RNPickerSelect from 'react-native-picker-select';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
+import TermsAndConditionModal from '../shared/TermsAndConditionModal';
 
 export default function Signup2Screen({ navigation }) {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ export default function Signup2Screen({ navigation }) {
   const [showDatePicker, setShowDatePicker] = React.useState(false);
   const [birthday, setBirthday] = React.useState(null);
   const [gender, setGender] = React.useState(null);
+  const [modalVisible, setModalVisible] = React.useState(false);
 
   return (
     <KeyboardAwareScrollView
@@ -207,9 +209,13 @@ export default function Signup2Screen({ navigation }) {
                   />
                 </View>
                 <View>
-                  <Text style={styles.text}>
-                    By proceeding you also agree to the Terms of Service and
-                    Privacy Policy
+                  <Text
+                    style={styles.text}
+                    onPress={() => setModalVisible(true)}>
+                    By proceeding you also agree to the{' '}
+                    <Text style={{ textDecorationLine: 'underline' }}>
+                      Terms of Service and Privacy Policy
+                    </Text>
                   </Text>
                   <Pressable
                     onPress={() => {
@@ -224,8 +230,13 @@ export default function Signup2Screen({ navigation }) {
                     ]}>
                     <Text style={styles.buttonText}>Next</Text>
                   </Pressable>
-                  <Text style={styles.text}>
-                    Already have an account? Sign in
+                  <Text
+                    style={styles.text}
+                    onPress={() => navigation.navigate('Signin')}>
+                    Already have an account?{' '}
+                    <Text style={{ textDecorationLine: 'underline' }}>
+                      Sign in
+                    </Text>
                   </Text>
                 </View>
               </View>
@@ -233,6 +244,10 @@ export default function Signup2Screen({ navigation }) {
           </Formik>
         </View>
       </TouchableWithoutFeedback>
+      <TermsAndConditionModal
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+      />
     </KeyboardAwareScrollView>
   );
 }

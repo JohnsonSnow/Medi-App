@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Entypo } from '@expo/vector-icons';
 import reducers from './store/reducers';
 import AppointmentHistoryScreen from './screens/AppointmentHistoryScreen';
 import DashboardScreen from './screens/DashboardScreen';
@@ -22,6 +23,7 @@ import Signup4Screen from './screens/Signup4Screen';
 import Signup5Screen from './screens/Signup5Screen';
 import Signup6Screen from './screens/Signup6Screen';
 import SignupCompleteScreen from './screens/SignupCompleteScreen';
+import DashboardNavigation from './navigations/DashboardNavigation';
 
 const store = createStore(reducers);
 const Stack = createNativeStackNavigator();
@@ -102,10 +104,8 @@ export default function App() {
           />
           <Stack.Screen
             name='Dashboard'
-            component={DashboardScreen}
-            options={{
-              title: ''
-            }}
+            component={DashboardNavigation}
+            options={{ headerShown: false }}
           />
           <Stack.Screen
             name='Request1'
