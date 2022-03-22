@@ -12,6 +12,9 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
+import authService from '../services/auth';
+import Loader from '../components/Loader';
+import theme from '../theme';
 
 export default function Signup5Screen({ navigation }) {
   const dispatch = useDispatch();
@@ -19,13 +22,42 @@ export default function Signup5Screen({ navigation }) {
   const [password, setPassword] = React.useState('');
   const [repeatPassword, setRepeatPassword] = React.useState('');
   const [error, setError] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+
+  const handleRegister = async ({
+    email,
+    password,
+    firstName,
+    lastName,
+    phoneNumber
+  }) => {
+    try {
+      setLoading(true);
+      const { data } = await authService.register({
+        email,
+        password,
+        firstName,
+        lastName,
+        phoneNumber
+      });
+      dispatch(userDetails({ ...appData, ...data, password }));
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Signup4' }]
+      });
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.data?.message || error.response.data.message);
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
               source={require('../assets/default.png')}
@@ -59,21 +91,32 @@ export default function Signup5Screen({ navigation }) {
                   setError('Repeat Password is required');
                   return;
                 }
+                if (password.length < 6) {
+                  setError('Password length must be 6 or more characters');
+                  return;
+                }
                 if (password !== repeatPassword) {
                   setError("Password doesn't match");
                   return;
                 }
                 setError('');
-                dispatch(userDetails({ ...appData, password }));
-                navigation.navigate('Signup6');
+                handleRegister({
+                  email: appData.email,
+                  firstName: appData.firstName,
+                  lastName: appData.lastName,
+                  phoneNumber: appData.phoneNumber,
+                  password
+                });
               }}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? '#767c96' : '#687089'
+                  backgroundColor: pressed
+                    ? theme.color.primaryLight
+                    : theme.color.primary
                 },
                 styles.button
               ]}>
-              <Text style={styles.buttonText}>Select Password</Text>
+              <Text style={styles.buttonText}>Sign Up</Text>
             </Pressable>
           </View>
         </View>
@@ -84,15 +127,13 @@ export default function Signup5Screen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 40,
     alignItems: 'center'
   },
   main: {
-    height: 300,
     paddingHorizontal: 20,
     paddingVertical: 50,
     justifyContent: 'space-between'
@@ -137,7 +178,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   }

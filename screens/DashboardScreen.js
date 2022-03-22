@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
 import { useSelector } from 'react-redux';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
+import theme from '../theme';
 
 export default function DashboardScreen({ navigation }) {
   const { firstName, lastName } = useSelector(state => state.app);
@@ -20,7 +21,7 @@ export default function DashboardScreen({ navigation }) {
           paginationStyleItemInactive={{ backgroundColor: '#aaa' }}>
           <View style={styles.card}>
             <Text style={{ ...styles.text, textAlign: 'left' }}>
-              Your Treatment Bills
+              Your Wallet Balance
             </Text>
             <View style={styles.cardLine}></View>
             <Text style={{ ...styles.text, marginTop: 5 }}>NGN 20,000.00</Text>
@@ -28,7 +29,7 @@ export default function DashboardScreen({ navigation }) {
           </View>
           <View style={styles.card}>
             <Text style={{ ...styles.text, textAlign: 'left' }}>
-              Your Treatment Bills
+              Your Wallet Balance
             </Text>
             <View style={styles.cardLine}></View>
             <Text style={{ ...styles.text, marginTop: 5 }}>NGN 30,000.00</Text>
@@ -36,7 +37,7 @@ export default function DashboardScreen({ navigation }) {
           </View>
           <View style={styles.card}>
             <Text style={{ ...styles.text, textAlign: 'left' }}>
-              Your Treatment Bills
+              Your Wallet Balance
             </Text>
             <View style={styles.cardLine}></View>
             <Text style={{ ...styles.text, marginTop: 5 }}>NGN 50,000.00</Text>
@@ -48,21 +49,25 @@ export default function DashboardScreen({ navigation }) {
             onPress={() => navigation.navigate('Request1')}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? '#767c96' : '#687089'
+                backgroundColor: pressed
+                  ? theme.color.primaryLight
+                  : theme.color.primary
               },
               styles.button
             ]}>
-            <Text style={styles.buttonText}>Request</Text>
+            <Text style={styles.buttonText}>Request a Loan</Text>
           </Pressable>
           <Pressable
             onPress={() => navigation.navigate('AppointmentHistory')}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? '#767c96' : '#687089'
+                backgroundColor: pressed
+                  ? theme.color.primaryLight
+                  : theme.color.primary
               },
               styles.button
             ]}>
-            <Text style={styles.buttonText}>Appointment History</Text>
+            <Text style={styles.buttonText}>Transfer to Bank</Text>
           </Pressable>
         </View>
         <View style={styles.buttonGroup}>
@@ -70,21 +75,25 @@ export default function DashboardScreen({ navigation }) {
             onPress={() => navigation.navigate('Payment')}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? '#767c96' : '#687089'
+                backgroundColor: pressed
+                  ? theme.color.primaryLight
+                  : theme.color.primary
               },
               styles.button
             ]}>
-            <Text style={styles.buttonText}>Payment</Text>
+            <Text style={styles.buttonText}>Fund Wallet</Text>
           </Pressable>
           <Pressable
             onPress={() => navigation.navigate('Refer')}
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? '#767c96' : '#687089'
+                backgroundColor: pressed
+                  ? theme.color.primaryLight
+                  : theme.color.primary
               },
               styles.button
             ]}>
-            <Text style={styles.buttonText}>Referral</Text>
+            <Text style={styles.buttonText}>Transfer to another Wallet</Text>
           </Pressable>
         </View>
       </View>
@@ -163,11 +172,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 150,
-    height: 100
+    flex: 1,
+    height: 100,
+    marginLeft: 10,
+    marginRight: 10
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 14,
     color: '#fff',
     textAlign: 'center'
   }

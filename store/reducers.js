@@ -16,7 +16,11 @@ const INITIAL_STATE = {
   city: '',
   state: '',
   password: '',
-  pinCode: ''
+  pinCode: '',
+  userId: '',
+  token: '',
+  virtualAccount: null,
+  walletId: null
 };
 
 const appReducer = (state = INITIAL_STATE, action) => {
@@ -38,7 +42,11 @@ const appReducer = (state = INITIAL_STATE, action) => {
         city: action.data.city,
         state: action.data.state,
         password: action.data.password,
-        pinCode: action.data.pinCode
+        pinCode: action.data.pinCode,
+        userId: action.data.userId,
+        token: action.data.token,
+        virtualAccount: action.data.virtualAccount,
+        walletId: action.data.walletId
       };
     default:
       return state;

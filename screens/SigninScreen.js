@@ -12,55 +12,67 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TermsAndConditionModal from '../shared/TermsAndConditionModal';
+import authService from '../services/auth';
+import { userDetails } from '../store/actions';
+import Loader from '../components/Loader';
+import theme from '../theme';
 
 export default function SigninScreen({ navigation }) {
   const appData = useSelector(state => state.app);
+  const dispatch = useDispatch();
   const [modalVisible, setModalVisible] = React.useState(false);
+  const [error, setError] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
+
+  const handleLogin = async (email, password) => {
+    try {
+      setLoading(true);
+      const { data } = await authService.login(email, password);
+      dispatch(userDetails({ ...appData, ...data }));
+      setLoading(false);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'DashboardNavigation' }]
+      });
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
               source={require('../assets/default.png')}
               style={styles.image}
             />
-            <Text style={styles.title}>AppName</Text>
+            <Text style={styles.title}>SureBucks</Text>
             <Text style={styles.subtitle}>
               Get a quick consult in 5 minutes
             </Text>
           </View>
           <Formik
             initialValues={{
-              uid: '',
+              email: '',
               password: ''
             }}
             validationSchema={yup.object().shape({
-              uid: yup.mixed().required('Email or Phone is required'),
+              email: yup
+                .string()
+                .required('Email is required')
+                .email('Email is invalid'),
               password: yup.string().required('Password is required')
             })}
-            onSubmit={({ uid, password }, actions) => {
-              if (
-                ![appData.email.toLowerCase(), appData.phoneNumber].includes(
-                  uid.toLowerCase()
-                )
-              ) {
-                actions.setErrors({ uid: 'Email or Phone is incorrect' });
-                return;
-              }
-              if (![appData.password].includes(password)) {
-                actions.setErrors({ password: 'Password is incorrect' });
-                return;
-              }
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'Dashboard' }]
-              });
+            onSubmit={({ email, password }, actions) => {
+              handleLogin(email, password);
             }}>
             {({
               handleChange,
@@ -74,13 +86,13 @@ export default function SigninScreen({ navigation }) {
                 <View>
                   <TextInput
                     style={styles.input}
-                    placeholder='Email or Phone*'
-                    onChangeText={handleChange('uid')}
-                    onBlur={handleBlur('uid')}
-                    value={values.uid}
+                    placeholder='Email*'
+                    onChangeText={handleChange('email')}
+                    onBlur={handleBlur('email')}
+                    value={values.email}
                   />
-                  {errors.uid && touched.uid && (
-                    <Text style={styles.errorText}>{errors.uid}</Text>
+                  {errors.email && touched.email && (
+                    <Text style={styles.errorText}>{errors.email}</Text>
                   )}
                   <TextInput
                     style={styles.input}
@@ -94,6 +106,7 @@ export default function SigninScreen({ navigation }) {
                     <Text style={styles.errorText}>{errors.password}</Text>
                   )}
                 </View>
+                {error && <Text style={styles.errorText}>{error}</Text>}
                 <Pressable
                   onPress={() => {
                     Keyboard.dismiss();
@@ -101,7 +114,9 @@ export default function SigninScreen({ navigation }) {
                   }}
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? '#767c96' : '#687089'
+                      backgroundColor: pressed
+                        ? theme.color.primaryLight
+                        : theme.color.primary
                     },
                     styles.button
                   ]}>
@@ -128,8 +143,7 @@ export default function SigninScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 40,
@@ -144,12 +158,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#687089',
+    color: theme.color.primary,
     textAlign: 'center',
     paddingHorizontal: 50
   },
   subtitle: {
-    color: '#b3b8c6',
+    color: theme.color.primaryLight,
     textAlign: 'center',
     paddingHorizontal: 50,
     paddingVertical: 20,
@@ -165,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginTop: 20,
-    color: '#b3b8c6',
+    color: theme.color.primaryLight,
     fontWeight: '600'
   },
   errorText: {
@@ -187,7 +201,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   }

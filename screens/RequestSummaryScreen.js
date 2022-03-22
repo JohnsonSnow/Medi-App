@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  Pressable,
-  Dimensions
-} from 'react-native';
+import { StyleSheet, Text, View, Pressable, Dimensions } from 'react-native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
 
 export default function RequestSummaryScreen({ navigation }) {

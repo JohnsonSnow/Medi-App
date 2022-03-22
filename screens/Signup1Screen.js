@@ -8,9 +8,7 @@ import {
   Image,
   Pressable,
   TouchableWithoutFeedback,
-  Keyboard,
-  Modal,
-  ScrollView
+  Keyboard
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import * as yup from 'yup';
@@ -18,6 +16,7 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
 import TermsAndConditionModal from '../shared/TermsAndConditionModal';
+import theme from '../theme';
 
 export default function Signup1Screen({ navigation }) {
   const dispatch = useDispatch();
@@ -26,7 +25,7 @@ export default function Signup1Screen({ navigation }) {
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -37,10 +36,6 @@ export default function Signup1Screen({ navigation }) {
               style={styles.image}
             />
             <Text style={styles.title}>Welcome</Text>
-            <Text style={styles.subtitle}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
-              asperiores ex totam delectus repellat.
-            </Text>
           </View>
           <Formik
             initialValues={{
@@ -114,7 +109,9 @@ export default function Signup1Screen({ navigation }) {
                     }}
                     style={({ pressed }) => [
                       {
-                        backgroundColor: pressed ? '#767c96' : '#687089'
+                        backgroundColor: pressed
+                          ? theme.color.primaryLight
+                          : theme.color.primary
                       },
                       styles.button
                     ]}>
@@ -140,20 +137,20 @@ const styles = StyleSheet.create({
   },
   hero: {
     paddingTop: 40,
-    backgroundColor: '#767c96',
+    backgroundColor: theme.color.primary,
     alignItems: 'center'
   },
   main: {
     flex: 1,
     paddingHorizontal: 20,
     paddingVertical: 50,
-    backgroundColor: '#eff1f8',
     justifyContent: 'space-between'
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
+    marginBottom: 24
   },
   subtitle: {
     color: '#fff',
@@ -171,14 +168,14 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#b3b8c6',
+    color: theme.color.primary,
     fontWeight: '600',
     marginTop: 10
   },
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    marginTop: 20,
+    marginTop: 30,
     padding: 14,
     borderRadius: 50
   },
@@ -192,14 +189,14 @@ const styles = StyleSheet.create({
   phoneCode: {
     height: 40,
     width: 60,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginRight: 10
   },
   phoneNumber: {
     flex: 1,
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10
   }
 });

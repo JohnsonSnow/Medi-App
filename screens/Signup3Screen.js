@@ -16,6 +16,7 @@ import { Formik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { userDetails } from '../store/actions';
 import stateAndCity from '../data/state-city.json';
+import theme from '../theme';
 
 export default function Signup3Screen({ navigation }) {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function Signup3Screen({ navigation }) {
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
@@ -52,7 +53,7 @@ export default function Signup3Screen({ navigation }) {
                   address2
                 })
               );
-              navigation.navigate('Signup4');
+              navigation.navigate('Signup5');
             }}>
             {({ handleChange, handleBlur, handleSubmit, values }) => (
               <View style={styles.main}>
@@ -145,7 +146,9 @@ export default function Signup3Screen({ navigation }) {
                   }}
                   style={({ pressed }) => [
                     {
-                      backgroundColor: pressed ? '#767c96' : '#687089'
+                      backgroundColor: pressed
+                        ? theme.color.primaryLight
+                        : theme.color.primary
                     },
                     styles.button
                   ]}>
@@ -162,8 +165,7 @@ export default function Signup3Screen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 40,
@@ -209,12 +211,12 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   },
   picker: {
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     color: '#000',
     height: 40,
     paddingHorizontal: Platform.OS === 'ios' ? 10 : 0,

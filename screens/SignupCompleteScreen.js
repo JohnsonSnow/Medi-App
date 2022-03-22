@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
+import theme from '../theme';
 
 export default function SignupCompleteScreen({ navigation }) {
   return (
@@ -21,7 +22,7 @@ export default function SignupCompleteScreen({ navigation }) {
           />
           <Text style={styles.title}>Sign up was successful.</Text>
           <Text style={styles.subtitle}>
-            You can now use AppName to get a consult.
+            You can now use SureBucks to get a quick loan.
           </Text>
         </View>
         <View style={styles.main}>
@@ -34,7 +35,9 @@ export default function SignupCompleteScreen({ navigation }) {
             }
             style={({ pressed }) => [
               {
-                backgroundColor: pressed ? '#767c96' : '#687089'
+                backgroundColor: pressed
+                  ? theme.color.primaryLight
+                  : theme.color.primary
               },
               styles.button
             ]}>
@@ -49,7 +52,7 @@ export default function SignupCompleteScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eff1f8'
+    backgroundColor: '#fff'
   },
   hero: {
     flex: 1,
@@ -64,12 +67,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#687089',
+    color: theme.color.primary,
     textAlign: 'center',
     paddingHorizontal: 50
   },
   subtitle: {
-    color: '#b3b8c6',
+    color: theme.color.primaryLight,
     textAlign: 'center',
     paddingHorizontal: 20,
     fontSize: 16,

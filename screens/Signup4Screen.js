@@ -10,17 +10,52 @@ import {
   Keyboard
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { useSelector } from 'react-redux';
+import authService from '../services/auth';
+import Loader from '../components/Loader';
+import theme from '../theme';
 
 export default function Signup4Screen({ navigation }) {
+  const appData = useSelector(state => state.app);
   const [code, setCode] = React.useState('');
   const [error, setError] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [requestMessage, setRequestMessage] = React.useState('');
+
+  const handleValidateOtp = async () => {
+    try {
+      setLoading(true);
+      await authService.confirmOtp(appData.email, code);
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'SignupComplete' }]
+      });
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
+
+  const handleRequestOtp = async () => {
+    try {
+      setLoading(true);
+      const data = await authService.requestOtp(appData.email);
+      setRequestMessage(data.message);
+      setError('');
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setError(error.response.data.message);
+    }
+  };
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
+          <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
               source={require('../assets/default.png')}
@@ -29,7 +64,10 @@ export default function Signup4Screen({ navigation }) {
             <Text style={styles.title}>
               We sent you a code to verify your number.
             </Text>
-            <Text style={styles.subtitle}>Sent to (234) 7030418192</Text>
+            <Text
+              style={
+                styles.subtitle
+              }>{`Sent to (${appData.phoneCode}) ${appData.phoneNumber}`}</Text>
           </View>
           <View style={styles.main}>
             <View>
@@ -43,21 +81,27 @@ export default function Signup4Screen({ navigation }) {
                 />
                 {error !== '' && <Text style={styles.errorText}>{error}</Text>}
               </View>
-              <Text style={styles.text}>Didn't get it? Send a new code</Text>
+              <Pressable
+                onPress={() => {
+                  Keyboard.dismiss();
+                  handleRequestOtp();
+                }}>
+                <Text style={styles.text}>Didn't get it? Send a new code</Text>
+              </Pressable>
+              {requestMessage !== '' && (
+                <Text style={styles.text}>{requestMessage}</Text>
+              )}
             </View>
             <Pressable
               onPress={() => {
                 Keyboard.dismiss();
-                if (code.length !== 6) {
-                  setError('Code must be 6-digit');
-                  return;
-                }
-                setError('');
-                navigation.navigate('Signup5');
+                handleValidateOtp();
               }}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? '#767c96' : '#687089'
+                  backgroundColor: pressed
+                    ? theme.color.primaryLight
+                    : theme.color.primary
                 },
                 styles.button
               ]}>
@@ -72,15 +116,13 @@ export default function Signup4Screen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 80,
     alignItems: 'center'
   },
   main: {
-    height: 300,
     paddingHorizontal: 20,
     paddingVertical: 50,
     justifyContent: 'space-between'
@@ -88,12 +130,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#687089',
+    color: theme.color.primary,
     textAlign: 'center',
     paddingHorizontal: 50
   },
   subtitle: {
-    color: '#b3b8c6',
+    color: theme.color.primaryLight,
     textAlign: 'center',
     paddingHorizontal: 50,
     paddingVertical: 20,
@@ -109,7 +151,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'center',
     marginTop: 20,
-    color: '#b3b8c6',
+    color: theme.color.primary,
     fontWeight: '600'
   },
   errorText: {
@@ -130,7 +172,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   }

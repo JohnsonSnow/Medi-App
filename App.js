@@ -1,12 +1,11 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Entypo } from '@expo/vector-icons';
 import reducers from './store/reducers';
 import AppointmentHistoryScreen from './screens/AppointmentHistoryScreen';
-import DashboardScreen from './screens/DashboardScreen';
 import OnboardingScreen from './screens/OnboardingScreen';
 import PaymentScreen from './screens/PaymentScreen';
 import PaymentCompleteScreen from './screens/PaymentCompleteScreen';
@@ -21,9 +20,9 @@ import Signup2Screen from './screens/Signup2Screen';
 import Signup3Screen from './screens/Signup3Screen';
 import Signup4Screen from './screens/Signup4Screen';
 import Signup5Screen from './screens/Signup5Screen';
-import Signup6Screen from './screens/Signup6Screen';
 import SignupCompleteScreen from './screens/SignupCompleteScreen';
 import DashboardNavigation from './navigations/DashboardNavigation';
+import theme from './theme';
 
 const store = createStore(reducers);
 const Stack = createNativeStackNavigator();
@@ -37,7 +36,7 @@ export default function App() {
           screenOptions={{
             headerBackTitleVisible: false,
             headerStyle: {
-              backgroundColor: '#767c96'
+              backgroundColor: theme.color.primaryLight
             },
             headerTintColor: '#fff'
           }}>
@@ -82,13 +81,6 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name='Signup6'
-            component={Signup6Screen}
-            options={{
-              title: 'Select Pin Code'
-            }}
-          />
-          <Stack.Screen
             name='SignupComplete'
             component={SignupCompleteScreen}
             options={{
@@ -103,7 +95,7 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name='Dashboard'
+            name='DashboardNavigation'
             component={DashboardNavigation}
             options={{ headerShown: false }}
           />

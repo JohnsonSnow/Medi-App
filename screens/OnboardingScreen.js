@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import theme from '../theme';
 
 export default function OnboardingScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style='dark' />
-      <Text style={styles.title}>AppName</Text>
+      <Text style={styles.title}>SureBucks</Text>
       <Image source={require('../assets/phone.png')} style={styles.image} />
       <Text style={styles.text}>Need our service?</Text>
       <Text style={styles.text}>
@@ -16,7 +17,9 @@ export default function OnboardingScreen({ navigation }) {
         onPress={() => navigation.navigate('Signup1')}
         style={({ pressed }) => [
           {
-            backgroundColor: pressed ? '#767c96' : '#687089'
+            backgroundColor: pressed
+              ? theme.color.primaryLight
+              : theme.color.primary
           },
           styles.button
         ]}>
@@ -37,25 +40,25 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 28,
-    color: '#687089',
+    color: theme.color.primary,
     fontWeight: '600'
   },
   image: {
     height: 300,
     width: 300,
     resizeMode: 'cover',
-    marginBottom: 50
+    marginBottom: 30
   },
   text: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#b3b8c6',
+    color: theme.color.primary,
     fontWeight: '600'
   },
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 20,
     padding: 14
   },
   buttonText: {
