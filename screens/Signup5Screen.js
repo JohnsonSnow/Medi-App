@@ -47,7 +47,9 @@ export default function Signup5Screen({ navigation }) {
       });
     } catch (error) {
       setLoading(false);
-      setError(error.response.data.data?.message || error.response.data.message);
+      setError(
+        error.response.data.data?.message || error.response.data.message
+      );
     }
   };
 
@@ -60,7 +62,7 @@ export default function Signup5Screen({ navigation }) {
           <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
           </View>
@@ -151,8 +153,8 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {

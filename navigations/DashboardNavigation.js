@@ -5,6 +5,7 @@ import Request1Screen from '../screens/Request1Screen';
 import AppointmentHistoryScreen from '../screens/AppointmentHistoryScreen';
 import PaymentScreen from '../screens/PaymentScreen';
 import ReferralScreen from '../screens/ReferralScreen';
+import theme from '../theme';
 
 const Drawer = createDrawerNavigator();
 
@@ -13,7 +14,7 @@ export default function DashboardNavigation() {
     <Drawer.Navigator
       initialRouteName='Dashboard'
       screenOptions={{
-        headerStyle: { backgroundColor: '#767c96' },
+        headerStyle: { backgroundColor: theme.color.primaryLight },
         headerTintColor: '#fff'
       }}>
       <Drawer.Screen name='Dashboard' component={DashboardScreen} />

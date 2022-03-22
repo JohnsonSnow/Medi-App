@@ -13,13 +13,13 @@ export default function Request3Screen({ navigation }) {
   React.useEffect(() => {
     setTimeout(() => navigation.navigate('RequestSummaryScreen'), 3000);
   }, []);
-  
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <View style={styles.hero}>
           <Image
-            source={require('../assets/default.png')}
+            source={require('../assets/SureBucks.png')}
             style={styles.image}
           />
         </View>
@@ -40,7 +40,7 @@ export default function Request3Screen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#eff1f8'
+    backgroundColor: '#fff'
   },
   hero: {
     paddingTop: 80,
@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 20,
     justifyContent: 'center',
     alignItems: 'center'
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {

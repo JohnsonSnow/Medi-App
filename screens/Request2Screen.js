@@ -15,6 +15,7 @@ import CurrencyInput from 'react-native-currency-input';
 import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import theme from '../theme';
 
 export default function Request2Screen({ navigation }) {
   const [medicalAllowance, setMedicalAllowance] = React.useState('');
@@ -24,13 +25,13 @@ export default function Request2Screen({ navigation }) {
 
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
           </View>
@@ -121,7 +122,9 @@ export default function Request2Screen({ navigation }) {
               }}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? '#767c96' : '#687089'
+                  backgroundColor: pressed
+                    ? theme.color.primaryLight
+                    : theme.color.primary
                 },
                 styles.button
               ]}>
@@ -136,8 +139,7 @@ export default function Request2Screen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 40,
@@ -161,8 +163,8 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {
@@ -183,16 +185,15 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   },
   picker: {
-    backgroundColor: '#fff',
     height: 40,
     paddingHorizontal: Platform.OS === 'ios' ? 10 : 0,
     marginBottom: 10,
     justifyContent: 'center',
-    backgroundColor: '#fff'
+    backgroundColor: '#f2f2f2'
   }
 });

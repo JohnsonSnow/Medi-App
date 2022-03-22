@@ -10,17 +10,18 @@ import {
   Keyboard
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import theme from '../theme';
 
 export default function ReferralScreen({ navigation }) {
   return (
     <KeyboardAwareScrollView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: '#fff' }}
       keyboardShouldPersistTaps='handled'>
       <TouchableWithoutFeedback style={{ flex: 1 }} onPress={Keyboard.dismiss}>
         <View style={styles.container}>
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
           </View>
@@ -42,7 +43,9 @@ export default function ReferralScreen({ navigation }) {
               }}
               style={({ pressed }) => [
                 {
-                  backgroundColor: pressed ? '#767c96' : '#687089'
+                  backgroundColor: pressed
+                    ? theme.color.primaryLight
+                    : theme.color.primary
                 },
                 styles.button
               ]}>
@@ -57,8 +60,7 @@ export default function ReferralScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#eff1f8'
+    flex: 1
   },
   hero: {
     paddingTop: 80,
@@ -82,8 +84,8 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {
@@ -94,7 +96,7 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    marginTop: 80,
+    marginTop: 50,
     padding: 14,
     borderRadius: 50
   },
@@ -104,7 +106,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    backgroundColor: '#fff',
+    backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
   }

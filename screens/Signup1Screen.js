@@ -32,10 +32,10 @@ export default function Signup1Screen({ navigation }) {
           <StatusBar style='light' />
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
-            <Text style={styles.title}>Welcome</Text>
+            {/* <Text style={styles.title}>Welcome</Text> */}
           </View>
           <Formik
             initialValues={{
@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
   },
   hero: {
     paddingTop: 40,
-    backgroundColor: theme.color.primary,
+    // backgroundColor: theme.color.primary,
     alignItems: 'center'
   },
   main: {
@@ -161,8 +161,8 @@ const styles = StyleSheet.create({
   },
   image: {
     marginTop: 20,
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {

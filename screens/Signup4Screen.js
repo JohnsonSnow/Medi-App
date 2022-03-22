@@ -58,7 +58,7 @@ export default function Signup4Screen({ navigation }) {
           <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
             <Text style={styles.title}>
@@ -119,12 +119,12 @@ const styles = StyleSheet.create({
     flex: 1
   },
   hero: {
-    paddingTop: 80,
+    paddingTop: 20,
     alignItems: 'center'
   },
   main: {
     paddingHorizontal: 20,
-    paddingVertical: 50,
+    paddingVertical: 20,
     justifyContent: 'space-between'
   },
   title: {
@@ -138,13 +138,13 @@ const styles = StyleSheet.create({
     color: theme.color.primaryLight,
     textAlign: 'center',
     paddingHorizontal: 50,
-    paddingVertical: 20,
+    paddingVertical: 10,
     fontSize: 16,
     fontWeight: '600'
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    marginTop: 50,
+    marginTop: 30,
     padding: 14,
     borderRadius: 50
   },

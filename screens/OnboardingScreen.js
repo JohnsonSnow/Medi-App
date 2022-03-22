@@ -7,8 +7,8 @@ export default function OnboardingScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <StatusBar style='dark' />
-      <Text style={styles.title}>SureBucks</Text>
-      <Image source={require('../assets/phone.png')} style={styles.image} />
+      {/* <Text style={styles.title}>SureBucks</Text> */}
+      <Image source={require('../assets/SureBucks.png')} style={styles.image} />
       <Text style={styles.text}>Need our service?</Text>
       <Text style={styles.text}>
         Get a quick consult in less than 5 minutes.
@@ -44,9 +44,9 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   image: {
-    height: 300,
-    width: 300,
-    resizeMode: 'cover',
+    height: 200,
+    width: 200,
+    resizeMode: 'contain',
     marginBottom: 30
   },
   text: {

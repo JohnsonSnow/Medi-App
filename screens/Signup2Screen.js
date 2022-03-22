@@ -37,7 +37,7 @@ export default function Signup2Screen({ navigation }) {
         <View style={styles.container}>
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
           </View>
@@ -281,8 +281,8 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {

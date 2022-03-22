@@ -51,10 +51,10 @@ export default function SigninScreen({ navigation }) {
           <Loader isLoading={loading} />
           <View style={styles.hero}>
             <Image
-              source={require('../assets/default.png')}
+              source={require('../assets/SureBucks.png')}
               style={styles.image}
             />
-            <Text style={styles.title}>SureBucks</Text>
+            {/* <Text style={styles.title}>SureBucks</Text> */}
             <Text style={styles.subtitle}>
               Get a quick consult in 5 minutes
             </Text>
@@ -171,8 +171,8 @@ const styles = StyleSheet.create({
     fontWeight: '600'
   },
   image: {
-    height: 80,
-    width: 80,
+    height: 100,
+    width: 200,
     resizeMode: 'contain'
   },
   text: {
