@@ -14,12 +14,43 @@ export default function RequestSummaryScreen({ navigation }) {
           paginationStyleItemActive={{ backgroundColor: '#fff' }}
           paginationStyleItemInactive={{ backgroundColor: '#aaa' }}>
           <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
+            <Text style={styles.text}>Your Loan Details</Text>
             <Text style={styles.subtext}>
               Documents will be mailed in 19 - 30 mins
             </Text>
             <Text style={{ ...styles.text, marginBottom: 20 }}>
-              Appt. Date: 31/12/2099
+              Loan Date: 31/12/2099
+            </Text>
+            <View style={styles.textDetails}>
+              <Text style={{ ...styles.text, fontWeight: '600' }}>
+                Loan Amount
+              </Text>
+              <Text style={styles.subtext}>$13</Text>
+            </View>
+            <View style={styles.textDetails}>
+              <Text style={{ ...styles.text, fontWeight: '600' }}>
+                Administrative Charges
+              </Text>
+              <Text style={styles.subtext}>$13</Text>
+            </View>
+            <View style={styles.textDetails}>
+              <Text style={{ ...styles.text, fontWeight: '600' }}>
+                Service Charge
+              </Text>
+              <Text style={styles.subtext}>$13</Text>
+            </View>
+            <View style={styles.textDetails}>
+              <Text style={styles.text}>Total</Text>
+              <Text style={styles.subtext}>$13</Text>
+            </View>
+          </View>
+          <View style={styles.card}>
+            <Text style={styles.text}>Your Loan Details</Text>
+            <Text style={styles.subtext}>
+              Documents will be mailed in 19 - 30 mins
+            </Text>
+            <Text style={{ ...styles.text, marginBottom: 20 }}>
+              Loan Date: 31/12/2099
             </Text>
             <View style={styles.textDetails}>
               <Text style={{ ...styles.text, fontWeight: '600' }}>
@@ -45,43 +76,12 @@ export default function RequestSummaryScreen({ navigation }) {
             </View>
           </View>
           <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
+            <Text style={styles.text}>Your Loan Details</Text>
             <Text style={styles.subtext}>
               Documents will be mailed in 19 - 30 mins
             </Text>
             <Text style={{ ...styles.text, marginBottom: 20 }}>
-              Appt. Date: 31/12/2099
-            </Text>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Consult Fees
-              </Text>
-              <Text style={styles.subtext}>$13</Text>
-            </View>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Administrative Charges
-              </Text>
-              <Text style={styles.subtext}>$13</Text>
-            </View>
-            <View style={styles.textDetails}>
-              <Text style={{ ...styles.text, fontWeight: '600' }}>
-                Service Charge
-              </Text>
-              <Text style={styles.subtext}>$13</Text>
-            </View>
-            <View style={styles.textDetails}>
-              <Text style={styles.text}>Total</Text>
-              <Text style={styles.subtext}>$13</Text>
-            </View>
-          </View>
-          <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
-            <Text style={styles.subtext}>
-              Documents will be mailed in 19 - 30 mins
-            </Text>
-            <Text style={{ ...styles.text, marginBottom: 20 }}>
-              Appt. Date: 31/12/2099
+              Loan Date: 31/12/2099
             </Text>
             <View style={styles.textDetails}>
               <Text style={{ ...styles.text, fontWeight: '600' }}>

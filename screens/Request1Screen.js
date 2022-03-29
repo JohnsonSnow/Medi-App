@@ -9,10 +9,13 @@ import {
   TouchableWithoutFeedback,
   Keyboard
 } from 'react-native';
+import RNPickerSelect from 'react-native-picker-select';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import theme from '../theme';
 
 export default function Request1Screen({ navigation }) {
+  const [bankName, setBankName] = React.useState(null);
+
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: '#fff' }}
@@ -26,9 +29,24 @@ export default function Request1Screen({ navigation }) {
             />
           </View>
           <View style={styles.main}>
-            <TextInput style={styles.input} placeholder='Policy Number' />
-            <TextInput style={styles.input} placeholder='Reference Code' />
-            <TextInput style={styles.input} placeholder='Agent Name' />
+            <TextInput style={styles.input} placeholder='Account Number' />
+            <TextInput style={styles.input} placeholder='BVN' />
+            <View style={styles.picker}>
+              <RNPickerSelect
+                placeholder={{
+                  label: 'Bank Name',
+                  value: null
+                }}
+                onValueChange={value => setBankName(value)}
+                style={{ inputAndroid: { color: 'black' } }}
+                value={bankName}
+                items={[
+                  { label: 'First Bank', value: 'First Bank' },
+                  { label: 'GT Bank', value: 'GT Bank' },
+                  { label: 'Sterling Bank', value: 'Sterling Bank' }
+                ]}
+              />
+            </View>
             <Pressable
               onPress={() => {
                 Keyboard.dismiss();
@@ -102,5 +120,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     paddingHorizontal: 10,
     marginBottom: 10
+  },
+  picker: {
+    backgroundColor: '#f2f2f2',
+    color: '#000',
+    height: 40,
+    paddingHorizontal: Platform.OS === 'ios' ? 10 : 0,
+    marginBottom: 10,
+    justifyContent: 'center'
   }
 });

@@ -20,8 +20,8 @@ export default function PaymentScreen() {
   const [index, setIndex] = useState(0);
   const [routes] = useState([
     { key: 'first', title: 'Debit Card' },
-    { key: 'second', title: 'Paypal' },
-    { key: 'third', title: 'Pay with Bank' }
+    // { key: 'second', title: 'Paypal' },
+    // { key: 'third', title: 'Pay with Bank' }
   ]);
 
   return (

@@ -77,7 +77,7 @@ export default function PaymentTabScreen() {
                 Your CVV is the last 3 digits in the signature strip on the back
                 of your card.
               </Text>
-              <View style={styles.toggleSection}>
+              {/* <View style={styles.toggleSection}>
                 <Text style={{ ...styles.text, marginTop: 0 }}>
                   Save Card Details
                 </Text>
@@ -88,7 +88,7 @@ export default function PaymentTabScreen() {
                   onValueChange={toggleSwitch}
                   value={isEnabled}
                 />
-              </View>
+              </View> */}
               <Pressable
                 onPress={() => {
                   Keyboard.dismiss();
@@ -129,7 +129,7 @@ export default function PaymentTabScreen() {
                   },
                   styles.button
                 ]}>
-                <Text style={styles.buttonText}>Pay</Text>
+                <Text style={styles.buttonText}>Save</Text>
               </Pressable>
             </View>
           </View>

@@ -8,8 +8,8 @@ export default function AppointmentHistoryScreen() {
         <View style={styles.main}>
           {/* card 1 */}
           <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
-            <Text style={styles.text}>Appt. Date: 31/12/2099</Text>
+            <Text style={styles.text}>Your Loan Details</Text>
+            <Text style={styles.text}>Loan Date: 31/12/2099</Text>
             <Text style={{ ...styles.text, marginBottom: 20 }}>
               Status: Completed
             </Text>
@@ -38,8 +38,8 @@ export default function AppointmentHistoryScreen() {
           </View>
           {/* card 2 */}
           <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
-            <Text style={styles.text}>Appt. Date: 31/12/2099</Text>
+            <Text style={styles.text}>Your Loan Details</Text>
+            <Text style={styles.text}>Loan Date: 31/12/2099</Text>
             <Text style={{ ...styles.text, marginBottom: 20 }}>
               Status: Completed
             </Text>
@@ -68,8 +68,8 @@ export default function AppointmentHistoryScreen() {
           </View>
           {/* card 3 */}
           <View style={styles.card}>
-            <Text style={styles.text}>Your Appt. Details</Text>
-            <Text style={styles.text}>Appt. Date: 31/12/2099</Text>
+            <Text style={styles.text}>Your Loan Details</Text>
+            <Text style={styles.text}>Loan Date: 31/12/2099</Text>
             <Text style={{ ...styles.text, marginBottom: 20 }}>
               Status: Completed
             </Text>
