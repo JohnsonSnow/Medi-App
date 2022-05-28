@@ -28,12 +28,12 @@ export default function ReferralScreen({ navigation }) {
           <View style={styles.main}>
             <TextInput
               style={styles.input}
-              placeholder='My Reference Code'
+              placeholder='Account Number'
               keyboardType='numeric'
             />
             <TextInput
               style={styles.input}
-              placeholder='Contact Phone Number'
+              placeholder='Bank Name'
               keyboardType='numeric'
             />
             <Pressable

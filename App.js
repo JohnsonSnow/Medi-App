@@ -128,10 +128,10 @@ export default function App() {
             }}
           />
           <Stack.Screen
-            name='Payment'
+            name='Fund Wallet'
             component={PaymentScreen}
             options={{
-              title: 'Payment'
+              title: 'Fund Wallet'
             }}
           />
           <Stack.Screen
@@ -145,7 +145,7 @@ export default function App() {
             name='AppointmentHistory'
             component={AppointmentHistoryScreen}
             options={{
-              title: 'Appointment History'
+              title: 'Loan History'
             }}
           />
           <Stack.Screen

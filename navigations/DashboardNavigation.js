@@ -19,11 +19,8 @@ export default function DashboardNavigation() {
       }}>
       <Drawer.Screen name='Dashboard' component={DashboardScreen} />
       <Drawer.Screen name='Request' component={Request1Screen} />
-      <Drawer.Screen
-        name='Appointment History'
-        component={AppointmentHistoryScreen}
-      />
-      <Drawer.Screen name='Payment' component={PaymentScreen} />
+      <Drawer.Screen name='Loan History' component={AppointmentHistoryScreen} />
+      <Drawer.Screen name='Fund Wallet' component={PaymentScreen} />
       <Drawer.Screen name='Referral' component={ReferralScreen} />
     </Drawer.Navigator>
   );

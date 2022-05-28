@@ -18,7 +18,7 @@ export default function PaymentCompleteScreen() {
               style={styles.iconImage}
             />
             <Text style={styles.text}>
-              Your consultant has been notified with your code [#RefCode]
+              Your loan has been approved with reference code [#RefCode]
             </Text>
           </View>
         </View>

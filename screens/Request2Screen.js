@@ -75,14 +75,14 @@ export default function Request2Screen({ navigation }) {
               separator='.'
               precision={2}
               style={styles.input}
-              placeholder='Medical Allowance'
+              placeholder='Monthly Salary'
               keyboardType='numeric'
             />
             <Pressable onPress={() => setShowDatePicker(true)}>
               <View pointerEvents='none'>
                 <TextInput
                   style={styles.input}
-                  placeholder='Payment Date'
+                  placeholder='Salary Payment Date'
                   onChangeText={value => setPaymentDate(value)}
                   value={
                     paymentDate
@@ -103,7 +103,7 @@ export default function Request2Screen({ navigation }) {
                 }}
               />
             )}
-            <TextInput style={styles.input} placeholder='Key Contact' />
+            <TextInput style={styles.input} placeholder='Job Role' />
             <CurrencyInput
               value={amountPaid}
               onChangeValue={setAmountPaid}

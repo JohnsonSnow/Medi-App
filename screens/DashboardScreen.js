@@ -72,7 +72,7 @@ export default function DashboardScreen({ navigation }) {
         </View>
         <View style={styles.buttonGroup}>
           <Pressable
-            onPress={() => navigation.navigate('Payment')}
+            onPress={() => navigation.navigate('Fund Wallet')}
             style={({ pressed }) => [
               {
                 backgroundColor: pressed
